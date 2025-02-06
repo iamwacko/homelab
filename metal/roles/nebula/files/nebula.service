@@ -1,0 +1,11 @@
+[Unit]
+Description=Nebula overlay networking tool
+
+[Service]
+SyslogIdentifier=nebula
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/local/bin/nebula -config /etc/nebula/config.yml
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

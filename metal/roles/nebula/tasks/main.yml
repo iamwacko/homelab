@@ -1,0 +1,54 @@
+---
+- name: Install Nebula
+  ansible.builtin.package:
+    name: nebula
+    state: present
+  when: ansible_facts['os_family'] != "Debian"
+
+# On Debian the Nebula package will always be out of date, so just download it
+- name: Install Nebula
+  ansible.builtin.unarchive:
+    src: https://github.com/slackhq/nebula/releases/latest/download/nebula-linux-amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: true
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Generate nebula config
+  ansible.builtin.template:
+    src: config.yml.j2
+    dest: /etc/nebula/config.yml
+    mode: "0644"
+
+- name: Copy CA
+  ansible.builtin.copy:
+
+    src: ca.crt
+    dest: /etc/nebula/ca.crt
+    cmd: ""
+- name: Copy private key
+  ansible.builtin.copy:
+    src: "../../../../.nebula/{{ nebula_name }}.key"
+    dest: /etc/nebula/{{ nebula_name }}.key
+
+- name: Copy crt
+  ansible.builtin.copy:
+    src: "../../../../.nebula/{{ nebula_name }}.crt"
+    dest: /etc/nebula/{{ nebula_name }}.crt
+
+- name: Copy systemd unit
+  ansible.builtin.copy:
+
+    src: nebula.service
+    dest: /etc/systemd/system/nebula.service
+    cmd: ""
+- name: Start Nebula
+  ansible.builtin.service:
+
+    name: nebula.service
+    state: started
+    enabled: "yes"
+- name: Restart cronjob
+  ansible.builtin.cron:
+    name: nebula cron
+    job: systemctl restart nebula
+    minute: "30"
