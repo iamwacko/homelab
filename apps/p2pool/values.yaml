@@ -1,0 +1,53 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: sethsimmons/p2pool
+            tag: v4.3
+          args:
+            - --host
+            - "node.monerodevs.org"
+            - --rpc-port
+            - "18089"
+            - --zmq-port
+            - "18084"
+            - --local-api
+            - --wallet
+            - "46oLx46fAXfehr5R995zVPeSB7tkfdkyWXWp6YYJN5faKujnc5zqDCyYWeChxQ6rRrFQZdaEizi66JqWc2JKKrAgB9fDWWu"
+            - --mini
+            - --data-api
+            - "/home/p2pool/.p2pool"
+  service:
+    main:
+      ports:
+        http:
+          port: 3333
+          protocol: HTTP
+  ingress:
+    main:
+      enabled: true
+      className: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        external-dns.alpha.kubernetes.io/target: "homelab-tunnel.iamawak.co"
+        external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+      hosts:
+        - host: &host p2pool.iamawak.co
+          paths:
+            - path: /
+              pathType: Prefix
+              service:
+                name: main
+                port: http
+      tls:
+        - hosts:
+            - *host
+          secretName: p2pool-tls-certificate
+  persistence:
+    data:
+      accessMode: ReadWriteOnce
+      size: 1Gi
+      globalMounts:
+        - path: /home/p2pool/.p2pool

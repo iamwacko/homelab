@@ -1,0 +1,20 @@
+app-template:
+  controllers:
+    main:
+      containers:
+        main:
+          image:
+            repository: iamwacko/xmrig
+            tag: v6.21.3
+          args:
+            - "--huge-pages-jit"
+            - "--cpu-priority=5"
+            - "--cpu-no-yield"
+            - "--randomx-1gb-pages"
+            - "--cpu-priority=4"
+            - "-t"
+            - "6"
+            - -u
+            - "p2pool"
+            - -o
+            - "p2pool.iamawak.co:3333"
