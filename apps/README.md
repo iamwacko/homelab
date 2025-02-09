@@ -1,0 +1,24 @@
+## Apps to add
+- https://truecharts.org/charts/premium/vaultwarden/
+- https://truecharts.org/charts/incubator/gatus/
+- https://truecharts.org/charts/incubator/docuseal/
+- https://truecharts.org/charts/stable/fileshelter/
+- https://truecharts.org/charts/stable/archiveteam-warrior/
+- https://truecharts.org/charts/stable/archivebox/
+- https://artifacthub.io/packages/helm/twin/gatus
+- https://artifacthub.io/packages/helm/harbor/harbor
+- https://artifacthub.io/packages/helm/bitnami/discourse
+- https://artifacthub.io/packages/helm/helm-hass/home-assistant
+- https://artifacthub.io/packages/helm/rocketchat-server/rocketchat
+- https://artifacthub.io/packages/helm/meshery/meshery
+- https://artifacthub.io/packages/helm/keel/keel
+- https://artifacthub.io/packages/helm/loft/vcluster
+- https://artifacthub.io/packages/helm/dragonfly/dragonfly
+- https://artifacthub.io/packages/helm/penpot/penpot
+- https://artifacthub.io/packages/helm/beryju-org/guacamole
+- https://artifacthub.io/packages/helm/netbox/netbox
+- https://artifacthub.io/packages/helm/nicholaswilde/snipe-it
+- https://artifacthub.io/packages/helm/klustair/klustair
+- https://github.com/dudeami0/lemmy-chart
+- https://github.com/bugfest/tor-controller
+- https://github.com/agabani/tor-operator

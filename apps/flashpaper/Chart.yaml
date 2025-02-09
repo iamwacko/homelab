@@ -1,0 +1,7 @@
+apiVersion: v2
+name: flashpaper
+version: 0.0.0
+dependencies:
+  - name: flashpaper
+    version: 3.5.1
+    repository: oci://tccr.io/truecharts

@@ -6,6 +6,9 @@ app-template:
           image:
             repository: quay.io/redlib/redlib
             tag: sha-d9e7681
+          env:
+            ENABLE_RSS: "true"
+            REDLIB_DEFAULT_SHOW_NSFW: "true"
   service:
     main:
       ports:
